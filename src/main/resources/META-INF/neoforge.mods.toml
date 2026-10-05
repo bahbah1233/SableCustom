@@ -1,0 +1,35 @@
+modLoader="javafxmod"
+loaderVersion="[1,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="shipautopilot"
+version="${file.jarVersion}"
+displayName="Ship Autopilot"
+displayURL="https://github.com/bahbah1233/SableCustom"
+logoFile=""
+credits=""
+authors="bahbah1233"
+description="""A powerful autopilot system for Sable sublevels. Enables players to set two waypoints (A and B) and automatically move a sublevel back and forth between them.
+
+Features:
+- /shipautopilot setA: Save current position as waypoint A
+- /shipautopilot setB: Save current position as waypoint B  
+- /shipautopilot start: Begin automated movement between waypoints
+- /shipautopilot stop: Stop autopilot propulsion
+- /shipautopilot status: View autopilot state and waypoint positions
+"""
+
+[[dependencies.shipautopilot]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="SERVER"
+
+[[dependencies.shipautopilot]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.252,)"
+ordering="NONE"
+side="SERVER"
