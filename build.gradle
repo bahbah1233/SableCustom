@@ -26,9 +26,6 @@ repositories {
     maven {
         url "https://maven.fabricmc.net/"
     }
-    maven {
-        url "https://repo.spongepowered.org/repository/maven-public"
-    }
 }
 
 base {
@@ -85,14 +82,9 @@ configurations {
 }
 
 dependencies {
-    // Based on the actual Sable source repo, the companion library is published as:
-    // dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.6.0
-    // This is a compile-only dependency so the mod can still run without bundling Sable.
-    compileOnly "dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.6.0"
-
-    // The main Sable mod itself appears to be published as dev.ryanhcode.sable:sable:2.0.6
-    // Keep this optional/compileOnly if you want to consume the mod jar directly in a dev environment.
-    // compileOnly "dev.ryanhcode.sable:sable:2.0.6"
+    // Ship Autopilot is fully functional without Sable.
+    // It uses reflection to detect and integrate with Sable if present at runtime.
+    // Users can add Sable as a separate mod dependency in their modpack.
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
