@@ -3,12 +3,12 @@ package com.bahbah.shipautopilot.event;
 import com.bahbah.shipautopilot.command.ShipAutopilotCommand;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Mod.EventBusSubscriber(modid = "shipautopilot", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.DEDICATED_SERVER)
+@EventBusSubscriber(modid = "shipautopilot", bus = EventBusSubscriber.Bus.GAME, value = Dist.DEDICATED_SERVER)
 public class CommandRegistrationHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger("shipautopilot");
 

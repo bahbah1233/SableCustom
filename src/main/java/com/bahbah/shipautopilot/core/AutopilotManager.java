@@ -27,14 +27,8 @@ public class AutopilotManager {
             return null;
         }
 
-        // First try to detect via Sable API if available
-        UUID detectedId = SableSubLevelDetector.detectSubLevelUnderPlayer(player);
-        if (detectedId != null) {
-            playerToSubLevel.put(player.getUUID().toString(), detectedId);
-            return detectedId;
-        }
-
         // Fallback to manual registration (for testing or non-Sable environments)
+        // Future: integrate with Sable API when available
         return playerToSubLevel.get(player.getUUID().toString());
     }
 
