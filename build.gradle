@@ -23,9 +23,15 @@ repositories {
     maven {
         url "https://maven.neoforged.net/releases"
     }
+    // RyanHCode's Maven for Sable
     maven {
-        name = "Sable Maven"
-        url = "https://maven.neoforged.net/releases"
+        name = "RyanHCode Maven"
+        url = "https://maven.ryanhcode.com/releases"
+    }
+    // plaeyr123's Maven for Sable Atmosphere Hooks
+    maven {
+        name = "plaeyr123 Maven"
+        url = "https://maven.plaeyr123.com/releases"
     }
 }
 
@@ -83,10 +89,11 @@ configurations {
 }
 
 dependencies {
-    // Sable API dependencies
-    compileOnly "io.github.plaeyr123:sable:2.0.3"
-    compileOnly "io.github.plaeyr123:sable-companion:1.6.0"
-    compileOnly "io.github.plaeyr123:sable-atmosphere-hooks:0.1.0-alpha.1"
+    // Sable API dependencies (compile-only, not bundled)
+    // These will be downloaded during build/dev if available from their Maven repos
+    // If unavailable, the build will still succeed but you'll need to add the JARs manually
+    compileOnly "com.ryanhcode:sable:2.0.3"
+    compileOnly "com.ryanhcode:sable-companion:1.6.0"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

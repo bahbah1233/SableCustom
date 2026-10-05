@@ -1,7 +1,6 @@
 package com.bahbah.shipautopilot.core;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class AutopilotManager {
     private static final Logger LOGGER = LoggerFactory.getLogger("shipautopilot");
-    private static final double SUBLEVEL_DETECTION_RANGE = 0.5; // Half a block
-    private static final double AUTOPILOT_SPEED = 0.15; // m/s thrust per tick
     private static final double WAYPOINT_PROXIMITY = 2.0; // Distance to consider waypoint reached
 
     private static final Map<UUID, SubLevelAutopilotState> autopilotStates = new ConcurrentHashMap<>();
@@ -30,13 +27,14 @@ public class AutopilotManager {
             return null;
         }
 
-        // TODO: Integrate with actual Sable API to detect sublevel under player
-        // For now, this is a placeholder that can be extended once Sable's
-        // collision detection API is available.
-        // The Sable Atmosphere Hooks would provide access to loaded SubLevels
-        // via SubLevelLifecycleApi.getLoadedSubLevels() or similar.
+        // First try to detect via Sable API if available
+        UUID detectedId = SableSubLevelDetector.detectSubLevelUnderPlayer(player);
+        if (detectedId != null) {
+            playerToSubLevel.put(player.getUUID().toString(), detectedId);
+            return detectedId;
+        }
 
-        LOGGER.debug("Checking for sublevel under player: {}", player.getName().getString());
+        // Fallback to manual registration (for testing or non-Sable environments)
         return playerToSubLevel.get(player.getUUID().toString());
     }
 
@@ -125,8 +123,8 @@ public class AutopilotManager {
             WaypointData current = state.getCurrentTarget();
             sb.append("Current Target: ").append(formatWaypoint(current)).append("\n");
             if (state.waypointA != null) {
-                double distToA = state.waypointA.distanceTo(current);
-                sb.append("Distance to Target: ").append(String.format("%.1f blocks", distToA));
+                double distToTarget = state.waypointA.distanceTo(current);
+                sb.append("Distance to Target: ").append(String.format("%.1f blocks", distToTarget));
             }
         }
         return sb.toString();

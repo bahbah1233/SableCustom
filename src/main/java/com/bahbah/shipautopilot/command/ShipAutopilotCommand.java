@@ -3,9 +3,7 @@ package com.bahbah.shipautopilot.command;
 import com.bahbah.shipautopilot.core.AutopilotManager;
 import com.bahbah.shipautopilot.core.WaypointData;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -17,9 +15,6 @@ import java.util.UUID;
 
 public class ShipAutopilotCommand {
     private static final Logger LOGGER = LoggerFactory.getLogger("shipautopilot");
-    private static final SuggestionProvider<CommandSourceStack> SUGGEST_SUBCOMMANDS =
-            (context, builder) -> SharedSuggestionProvider.suggest(
-                    new String[]{"setA", "setB", "start", "stop", "status"}, builder);
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
@@ -47,7 +42,7 @@ public class ShipAutopilotCommand {
 
             UUID subLevelId = AutopilotManager.getSubLevelUnderPlayer(source.getPlayer());
             if (subLevelId == null) {
-                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel"));
+                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel. If standing on one, try /shipautopilot debug"));
                 return 0;
             }
 
@@ -82,7 +77,7 @@ public class ShipAutopilotCommand {
 
             UUID subLevelId = AutopilotManager.getSubLevelUnderPlayer(source.getPlayer());
             if (subLevelId == null) {
-                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel"));
+                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel. If standing on one, try /shipautopilot debug"));
                 return 0;
             }
 
@@ -117,7 +112,7 @@ public class ShipAutopilotCommand {
 
             UUID subLevelId = AutopilotManager.getSubLevelUnderPlayer(source.getPlayer());
             if (subLevelId == null) {
-                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel"));
+                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel. If standing on one, try /shipautopilot debug"));
                 return 0;
             }
 
@@ -149,7 +144,7 @@ public class ShipAutopilotCommand {
 
             UUID subLevelId = AutopilotManager.getSubLevelUnderPlayer(source.getPlayer());
             if (subLevelId == null) {
-                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel"));
+                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel. If standing on one, try /shipautopilot debug"));
                 return 0;
             }
 
@@ -176,7 +171,7 @@ public class ShipAutopilotCommand {
 
             UUID subLevelId = AutopilotManager.getSubLevelUnderPlayer(source.getPlayer());
             if (subLevelId == null) {
-                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel"));
+                source.sendFailure(Component.literal("[Ship Autopilot] You must be standing on a Sable sublevel. If standing on one, try /shipautopilot debug"));
                 return 0;
             }
 
